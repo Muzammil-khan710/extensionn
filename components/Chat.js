@@ -1,32 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Chat = () => {
-  //   const [message, setMessage] = useState("");
-  //   const [messages, setMessages] = useState([
-  // {
-  //   sender: "user",
-  //   msg: "hiii",
-  // },
-  // {
-  //   sender: "bot",
-  //   msg: "hello",
-  // },
-  // {
-  //   sender: "user",
-  //   msg: "What's my name",
-  // },
-  // {
-  //   sender: "bot",
-  //   msg: "Your name is Amit Rawat",
-  // },
-  //   ]);
-
-  //   new js
   const [textInput, setTextInput] = useState("");
   const [result, setResult] = useState();
 
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    sendBotMsg();
+  }, [result]);
+
   async function onSubmit(event) {
     event.preventDefault();
+
+    setMessages((prev) => [...prev, { sender: "user", msg: textInput }]);
+
     try {
       const response = await fetch("/api/server", {
         method: "POST",
@@ -37,7 +25,7 @@ const Chat = () => {
       });
 
       const data = await response.json();
-      // console.log(data)
+      console.log(data);
       if (response.status !== 200) {
         throw (
           data.error ||
@@ -47,43 +35,25 @@ const Chat = () => {
 
       setResult(data.result);
       setTextInput("");
+
+      sendBotMsg();
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
   }
-  //   new js
 
-  //   const sendUserMsg = () => {
-  //     setMessages((prev) => [...prev, { sender: "user", msg: message }]);
-  //     setMessage("");
-
-  //     setTimeout(sendBotMsg, 1000);
-  //     // sendBotMsg();
-  //   };
   const sendBotMsg = () => {
-    setMessages((prev) => [...prev, { sender: "bot", msg: { result } }]);
+    console.log(result, "--result");
+    if (result) {
+      setMessages((prev) => [...prev, { sender: "bot", msg: result }]);
+      setResult("");
+    }
   };
 
   return (
     <div>
-      {/* <div className="container">
-        {messages.map((el, id) => {
-          return (
-            // <div className="msgContainer">
-            <div className={el?.sender === "user" ? "msg_user" : "msg_bot"}>
-              {el.msg}
-            </div>
-            // </div>
-          );
-        })}
-      </div> */}
-      {/* <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      ></input> */}
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -95,9 +65,19 @@ const Chat = () => {
         />
         <input type="submit" value="Submit" className="submit_button" />
       </form>
-      {/* <div className="">
-        <h1>{result} this is your result</h1>
-      </div> */}
+
+      <div className="container">
+        {messages.map((el, id) => {
+          return (
+            <div
+              className={el?.sender === "user" ? "msg_user" : "msg_bot"}
+              key={id}
+            >
+              {el.msg}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

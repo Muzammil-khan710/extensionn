@@ -95,3 +95,17 @@ export default Chat;
   text-align: left;
   align-self: start;
 }
+.input_text {
+  background: rgb(107, 101, 101);
+  width: 85%;
+  padding: 10px;
+  font-size: 20px;
+  color: white;
+}
+.submit_button {
+  color: white;
+  background: rgb(58, 59, 57);
+  width: 15%;
+  padding: 10px;
+  font-size: 20px;
+}
