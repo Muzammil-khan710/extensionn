@@ -8,6 +8,7 @@ const Chat = () => {
 
   useEffect(() => {
     sendBotMsg();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result]);
 
   async function onSubmit(event) {
@@ -54,7 +55,7 @@ const Chat = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='form_input'>
         <input
           type="text"
           name="text"
