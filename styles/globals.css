@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -104,4 +104,40 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.container {
+  width: 100%;
+  height: 500px;
+  overflow-y: auto;
+
+  background: gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.msgContainer {
+  background: red;
+  width: 100%;
+  justify-self: end;
+}
+.msg_user {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  margin: 8px 2px;
+  width: auto;
+  border-radius: 20px;
+  text-align: right;
+  align-self: end;
+}
+.msg_bot {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  margin: 8px 2px;
+  width: auto;
+  border-radius: 20px;
+  text-align: left;
+  align-self: start;
 }

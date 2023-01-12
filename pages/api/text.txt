@@ -1,0 +1,97 @@
+import React, { useState } from "react";
+
+const Chat = () => {
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([
+    // {
+    //   sender: "user",
+    //   msg: "hiii",
+    // },
+    // {
+    //   sender: "bot",
+    //   msg: "hello",
+    // },
+    // {
+    //   sender: "user",
+    //   msg: "What's my name",
+    // },
+    // {
+    //   sender: "bot",
+    //   msg: "Your name is Amit Rawat",
+    // },
+  ]);
+
+  const sendUserMsg = () => {
+    setMessages((prev) => [...prev, { sender: "user", msg: message }]);
+    setMessage("");
+
+    setTimeout(sendBotMsg, 1000);
+    // sendBotMsg();
+  };
+  const sendBotMsg = () => {
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", msg: "Sorry I don't Know" },
+    ]);
+  };
+
+  return (
+    <div>
+      <div className="container">
+        {messages.map((el, id) => {
+          return (
+            // <div className="msgContainer">
+            <div className={el?.sender === "user" ? "msg_user" : "msg_bot"}>
+              {el.msg}
+            </div>
+            // </div>
+          );
+        })}
+      </div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      ></input>
+      <button onClick={sendUserMsg}>Send</button>
+    </div>
+  );
+};
+
+export default Chat;
+
+.container {
+  width: 100%;
+  height: 500px;
+  overflow-y: auto;
+
+  background: gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.msgContainer {
+  background: red;
+  width: 100%;
+  justify-self: end;
+}
+.msg_user {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  margin: 8px 2px;
+  width: auto;
+  border-radius: 20px;
+  text-align: right;
+  align-self: end;
+}
+.msg_bot {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  margin: 8px 2px;
+  width: auto;
+  border-radius: 20px;
+  text-align: left;
+  align-self: start;
+}
