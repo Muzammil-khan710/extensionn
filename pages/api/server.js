@@ -32,8 +32,9 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(textInput),
-
+      max_tokens: 20,
       temperature: 0.6,
+      n: 2
     });
 
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -58,9 +59,15 @@ function generatePrompt(textInput) {
   return `Suggest answers for the user input.
   
   textInput: Name three tourist attraction places in India?
-  Names: The Taj Mahal, The Holy City of Varanasi, The Golden Temple of Amritsar.
+  Names: The Taj Mahal, The Holy City of Varanasi, The Golden Temple of Amritsar. These are the best places to visit in India.
   textInput: Which is most popular stack for web apps
-  Names: MERN stack is very much popular stack.
+  Names: MERN stands for MongoDB, Express, React, Node, after the four key technologies that make up the stack.
+
+ 1. MongoDB — document database
+ 2. Express(.js) — Node.js web framework
+ 3. React(.js) — a client-side JavaScript framework
+ 4. Node(.js) — the premier JavaScript web server
+  
   textInput: ${capitalizedText}
   Names:`;
 }
