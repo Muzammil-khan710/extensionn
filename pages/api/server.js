@@ -18,6 +18,7 @@ export default async function (req, res) {
   }
 
   const textInput = req.body.textInput || "";
+  // console.log(textInput)
   if (textInput.trim().length === 0) {
     res.status(400).json({
       error: {
@@ -30,6 +31,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
+      prompt: generatePrompt(textInput),
       prompt: generatePrompt("Which is best stack for web apps"),
       temperature: 0,
     });
@@ -57,8 +59,8 @@ function generatePrompt(textInput) {
   
   textInput: Name three tourist attraction places in India?
   Names: The Taj Mahal, The Holy City of Varanasi, The Golden Temple of Amritsar.
-  textInput: Which is best stack for web apps
-  Names: LAMP, MERN, MEAN etc.
+  textInput: Which is most popular stack for web apps
+  Names: MERN stack is very much popular stack.
   textInput: ${capitalizedText}
   Names:`;
 }

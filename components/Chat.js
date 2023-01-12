@@ -37,6 +37,7 @@ const Chat = () => {
       });
 
       const data = await response.json();
+      // console.log(data)
       if (response.status !== 200) {
         throw (
           data.error ||
@@ -45,7 +46,7 @@ const Chat = () => {
       }
 
       setResult(data.result);
-      setTextInputt("");
+      setTextInput("");
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -67,8 +68,8 @@ const Chat = () => {
 
   return (
     <div>
-      <div className="container">
-        {/* {messages.map((el, id) => {
+      {/* <div className="container">
+        {messages.map((el, id) => {
           return (
             // <div className="msgContainer">
             <div className={el?.sender === "user" ? "msg_user" : "msg_bot"}>
@@ -76,8 +77,8 @@ const Chat = () => {
             </div>
             // </div>
           );
-        })} */}
-      </div>
+        })}
+      </div> */}
       {/* <input
         type="text"
         value={message}
