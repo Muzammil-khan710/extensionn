@@ -68,7 +68,7 @@ const Chat = () => {
   return (
     <div>
       <div className="container">
-        {messages.map((el, id) => {
+        {/* {messages.map((el, id) => {
           return (
             // <div className="msgContainer">
             <div className={el?.sender === "user" ? "msg_user" : "msg_bot"}>
@@ -76,7 +76,7 @@ const Chat = () => {
             </div>
             // </div>
           );
-        })}
+        })} */}
       </div>
       {/* <input
         type="text"
@@ -86,16 +86,17 @@ const Chat = () => {
       <form onSubmit={onSubmit}>
         <input
           type="text"
-          name="animal"
+          name="text"
           placeholder="Enter an text"
-          value={TextInput}
+          value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
+          className="input_text"
         />
-        <input type="submit" value="Generate names" />
+        <input type="submit" value="Submit" className="submit_button" />
       </form>
-      <div className="">
-        <h1>{result}</h1>
-      </div>
+      {/* <div className="">
+        <h1>{result} this is your result</h1>
+      </div> */}
     </div>
   );
 };
