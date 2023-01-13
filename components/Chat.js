@@ -17,6 +17,8 @@ const Chat = () => {
     setMessages((prev) => [...prev, { sender: "user", msg: textInput }]);
 
     try {
+      //here we are requesting from the server and creating a simple fetch method
+      // data/body here is textInput
       const response = await fetch("/api/server", {
         method: "POST",
         headers: {
@@ -58,7 +60,7 @@ const Chat = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="form_input">
         <input
           type="text"
           name="text"
