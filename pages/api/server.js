@@ -7,6 +7,8 @@ const openai = new OpenAIApi(configuration);
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async function (req, res) {
+  // This functions check is api exist or not 
+  // If not exist it will throw error
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -17,6 +19,8 @@ export default async function (req, res) {
     return;
   }
 
+  //This function checks whether request body is empty or not
+  //If there is no textInput than it will throw error
   const textInput = req.body.textInput || "";
   // console.log(textInput)
   if (textInput.trim().length === 0) {
@@ -28,6 +32,9 @@ export default async function (req, res) {
     return;
   }
 
+
+  // Main request to chat GPT here method we are using is createCompletion
+  // defined model, propmt, and other properties
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
@@ -36,8 +43,9 @@ export default async function (req, res) {
       temperature: 1,
       n: 2
     });
-
+    //taking the result from here and setting the status to 200
     res.status(200).json({ result: completion.data.choices[0].text });
+    //here we will catch error if there are any and give output accordingly
   } catch (error) {
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -53,6 +61,8 @@ export default async function (req, res) {
   }
 }
 
+// this is genratePropmt function which takes input and we define here to our program/AI that what type of response we want
+// the way we define here the way our AI will give responses accordingly
 function generatePrompt(textInput) {
   const capitalizedText =
     textInput[0].toUpperCase() + textInput.slice(1).toLowerCase();
