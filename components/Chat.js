@@ -7,11 +7,12 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    sendBotMsg();
+    sendBotMsg(); //change ui send mess bot
   }, [result]);
 
   async function onSubmit(event) {
     event.preventDefault();
+    // pagereload
 
     setMessages((prev) => [...prev, { sender: "user", msg: textInput }]);
 
@@ -25,6 +26,7 @@ const Chat = () => {
       });
 
       const data = await response.json();
+      // erro
       console.log(data);
       if (response.status !== 200) {
         throw (
@@ -34,7 +36,8 @@ const Chat = () => {
       }
 
       setResult(data.result);
-      setTextInput("");
+      //set result
+      setTextInput(""); //set input field to empty string
 
       sendBotMsg();
     } catch (error) {
@@ -45,7 +48,8 @@ const Chat = () => {
   }
 
   const sendBotMsg = () => {
-    console.log(result, "--result");
+    // console.log(result, "--result");
+    // show result  if data come other wise dont show data
     if (result) {
       setMessages((prev) => [...prev, { sender: "bot", msg: result }]);
       setResult("");
