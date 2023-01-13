@@ -8,6 +8,7 @@ const Chat = () => {
 
   useEffect(() => {
     sendBotMsg(); //change ui send mess bot
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result]);
 
   async function onSubmit(event) {
